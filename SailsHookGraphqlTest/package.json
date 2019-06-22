@@ -1,0 +1,41 @@
+{
+  "name": "wmssails-1",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "@sailshq/connect-redis": "^3.2.1",
+    "@sailshq/lodash": "^3.10.3",
+    "@sailshq/socket.io-redis": "^5.2.0",
+    "express-graphql": "^0.8.0",
+    "fcm-node": "^1.5.1",
+    "graphql": "^14.3.1",
+    "grunt": "1.0.1",
+    "lodash": "^4.17.11",
+    "sails": "^1.1.0",
+    "sails-hook-grunt": "^3.1.0",
+    "sails-hook-orm": "^2.1.1",
+    "sails-hook-sockets": "^1.5.5",
+    "sails-mysql": "^1.0.1"
+  },
+  "devDependencies": {
+    "@sailshq/eslint": "^4.19.3"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production node app.js",
+    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
+    "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
+    "custom-tests": "echo \"(No other custom tests yet.)\" && echo"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pratik/wmssails-1.git"
+  },
+  "author": "pratik",
+  "license": "",
+  "engines": {
+    "node": "^10.15"
+  }
+}
