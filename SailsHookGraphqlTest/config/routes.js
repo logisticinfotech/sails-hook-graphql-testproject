@@ -21,11 +21,11 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
 
-  'GET /tweet/find': { action: 'user/tweetlist' },
-  'GET /jointest': { action: 'user/usertweets' },
+  // 'GET /tweet/find': { action: 'user/tweetlist' },
+  // 'GET /jointest': { action: 'user/usertweets' },
 
   'POST /graphql': { action: 'graphql/gql' },
-  'POST /graphqlManually': { action: 'graphql/gqlmanually' },
+  // 'POST /graphqlManually': { action: 'graphql/gqlmanually' },
 
   /***************************************************************************
   *                                                                          *

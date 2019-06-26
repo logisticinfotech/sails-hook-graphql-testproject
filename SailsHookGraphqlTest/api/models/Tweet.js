@@ -11,9 +11,14 @@ module.exports = {
         body: {
             type: 'string'
         },
+        created_at: {
+            type: 'string'
+        },
+        updated_at: {
+            type: 'string'
+        },
         user: {
-            model: 'User',
-            columnName: "user_id"
+            model: 'User'
         }
     }
 };
