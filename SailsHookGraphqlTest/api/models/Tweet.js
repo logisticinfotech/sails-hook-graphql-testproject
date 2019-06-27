@@ -16,10 +16,12 @@ module.exports = {
       type: 'string'
     },
     created_at: {
-      type: 'string'
+      type: 'ref',
+      columnType: 'datetime'
     },
     updated_at: {
-      type: 'string'
+      type: 'ref', 
+      columnType: 'datetime'
     },
     user_id: {
       model: 'User'

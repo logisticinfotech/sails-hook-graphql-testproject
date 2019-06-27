@@ -29,11 +29,11 @@ module.exports = {
     },
     created_at: {
       type: 'ref',
-      columnType: 'timestamp'
+      columnType: 'datetime'
     },
     updated_at: {
-      type: 'ref',
-      columnType: 'timestamp'
+      type: 'ref', 
+      columnType: 'datetime'
     },
     tweets: {
       type: 'json',
