@@ -6,32 +6,37 @@
  */
 
 module.exports = {
-    tableName: 'users',
-    attributes: {
-        name: {
-            type: 'string'
-        },
-        username: {
-            type: 'string'
-        },
-        email: {
-            type: 'string'
-        },
-        avatar: {
-            type: 'string'
-        },
-        cover: {
-            type: 'string'
-        },
-        created_at: {
-            type: 'string'
-        },
-        updated_at: {
-            type: 'string'
-        },
-        tweets: {
-            collection: 'Tweet',
-            via: 'user'
-        }
+  tableName: 'users',
+  attributes: {
+    id: {
+      type: 'number',
+      autoIncrement: true,
+    },
+    name: {
+      type: 'string'
+    },
+    username: {
+      type: 'string'
+    },
+    email: {
+      type: 'string'
+    },
+    avatar: {
+      type: 'string'
+    },
+    cover: {
+      type: 'string'
+    },
+    created_at: {
+      type: 'string'
+    },
+    updated_at: {
+      type: 'string'
+    },
+    tweets: {
+      type: 'json',
+      collection: 'Tweet',
+      via: 'user_id'
     }
+  }
 };

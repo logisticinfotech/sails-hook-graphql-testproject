@@ -1,28 +1,26 @@
 /**
- * Tweet.js
+ * CustomerSetting.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
-  tableName: 'tweets',
+  tableName: 'CustomerSetting',
+  primaryKey: 'CustomerSettingId',
   attributes: {
-    id: {
+    CustomerSettingId: {
       type: 'number',
       autoIncrement: true,
     },
-    body: {
+    Name: {
       type: 'string'
     },
-    created_at: {
+    Value: {
       type: 'string'
     },
-    updated_at: {
-      type: 'string'
-    },
-    user_id: {
-      model: 'User'
+    CustomerID: {
+      model: 'Customer'
     }
   }
 };
