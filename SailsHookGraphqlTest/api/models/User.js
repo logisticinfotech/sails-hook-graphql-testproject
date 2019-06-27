@@ -28,10 +28,12 @@ module.exports = {
       type: 'string'
     },
     created_at: {
-      type: 'string'
+      type: 'ref',
+      columnType: 'timestamp'
     },
     updated_at: {
-      type: 'string'
+      type: 'ref',
+      columnType: 'timestamp'
     },
     tweets: {
       type: 'json',
