@@ -1,0 +1,154 @@
+type archive implements Node {
+  id: String!
+  createdAt: CustomJson
+  fromModel: String
+  originalRecord: CustomJson
+  originalRecordId: CustomJson
+  type: String!
+  count: String!
+  average: Float!
+}
+
+type customer implements Node {
+  CustomerID: CustomJson
+  Description: String
+  PrimaryFacilityID: CustomJson
+  facilitys: CustomJson
+  id: String!
+  type: String!
+  count: String!
+  average: Float!
+}
+
+type customerfacility implements Node {
+  id: String!
+  type: String!
+  count: String!
+  average: Float!
+  customer: customer
+  facility: facility
+}
+
+type customersetting implements Node {
+  CustomerSettingId: CustomJson
+  Name: String
+  Value: String
+  id: String!
+  type: String!
+  count: String!
+  average: Float!
+  CustomerID: customer
+}
+
+"""CustomJson scalar type"""
+scalar CustomJson
+
+type facility implements Node {
+  FacilityID: CustomJson
+  Description: String
+  ContactID: CustomJson
+  id: String!
+  type: String!
+  count: String!
+  average: Float!
+}
+
+type Mutation {
+  createCustomer(CustomerID: CustomJson, Description: String, PrimaryFacilityID: CustomJson, facilitys: CustomJson): customer
+  updateCustomer(CustomerID: CustomJson, Description: String, PrimaryFacilityID: CustomJson, facilitys: CustomJson): customer
+  deleteCustomer(CustomerID: CustomJson, Description: String, PrimaryFacilityID: CustomJson, facilitys: CustomJson): customer
+  createCustomerfacility(id: CustomJson): customerfacility
+  updateCustomerfacility(id: CustomJson): customerfacility
+  deleteCustomerfacility(id: CustomJson): customerfacility
+  createCustomersetting(CustomerSettingId: CustomJson, Name: String, Value: String): customersetting
+  updateCustomersetting(CustomerSettingId: CustomJson, Name: String, Value: String): customersetting
+  deleteCustomersetting(CustomerSettingId: CustomJson, Name: String, Value: String): customersetting
+  createFacility(FacilityID: CustomJson, Description: String, ContactID: CustomJson): facility
+  updateFacility(FacilityID: CustomJson, Description: String, ContactID: CustomJson): facility
+  deleteFacility(FacilityID: CustomJson, Description: String, ContactID: CustomJson): facility
+  createTweet(id: CustomJson, body: String, created_at: CustomJson, updated_at: CustomJson): tweet
+  updateTweet(id: CustomJson, body: String, created_at: CustomJson, updated_at: CustomJson): tweet
+  deleteTweet(id: CustomJson, body: String, created_at: CustomJson, updated_at: CustomJson): tweet
+  createUser(id: CustomJson, name: String, username: String, email: String, avatar: String, cover: String, created_at: CustomJson, updated_at: CustomJson, tweets: CustomJson): user
+  updateUser(id: CustomJson, name: String, username: String, email: String, avatar: String, cover: String, created_at: CustomJson, updated_at: CustomJson, tweets: CustomJson): user
+  deleteUser(id: CustomJson, name: String, username: String, email: String, avatar: String, cover: String, created_at: CustomJson, updated_at: CustomJson, tweets: CustomJson): user
+  createWarehousetransaction(WarehouseTransactionID: CustomJson, CustomerID: CustomJson, FacilityID: CustomJson, Status: CustomJson, UnderAllocated: CustomJson, CreationDate: String, ProcessDate: String): warehousetransaction
+  updateWarehousetransaction(WarehouseTransactionID: CustomJson, CustomerID: CustomJson, FacilityID: CustomJson, Status: CustomJson, UnderAllocated: CustomJson, CreationDate: String, ProcessDate: String): warehousetransaction
+  deleteWarehousetransaction(WarehouseTransactionID: CustomJson, CustomerID: CustomJson, FacilityID: CustomJson, Status: CustomJson, UnderAllocated: CustomJson, CreationDate: String, ProcessDate: String): warehousetransaction
+  createArchive(id: CustomJson, createdAt: CustomJson, fromModel: String, originalRecord: CustomJson, originalRecordId: CustomJson): archive
+  updateArchive(id: CustomJson, createdAt: CustomJson, fromModel: String, originalRecord: CustomJson, originalRecordId: CustomJson): archive
+  deleteArchive(id: CustomJson, createdAt: CustomJson, fromModel: String, originalRecord: CustomJson, originalRecordId: CustomJson): archive
+}
+
+"""An object with an ID"""
+interface Node {
+  """The global unique ID of an object"""
+  id: String!
+
+  """The type of the object"""
+  type: String!
+}
+
+type Query {
+  """A node interface field"""
+  node(
+    """Id of node interface"""
+    id: String!
+  ): Node
+  customer(id: String!): customer
+  customers(where: CustomJson, sort: String, skip: Int, limit: Int, populate: CustomJson, aggregate: CustomJson): [customer]
+  customerfacility(id: String!): customerfacility
+  customerfacilitys(where: CustomJson, sort: String, skip: Int, limit: Int, populate: CustomJson, aggregate: CustomJson): [customerfacility]
+  customersetting(id: String!): customersetting
+  customersettings(where: CustomJson, sort: String, skip: Int, limit: Int, populate: CustomJson, aggregate: CustomJson): [customersetting]
+  facility(id: String!): facility
+  facilitys(where: CustomJson, sort: String, skip: Int, limit: Int, populate: CustomJson, aggregate: CustomJson): [facility]
+  tweet(id: String!): tweet
+  tweets(where: CustomJson, sort: String, skip: Int, limit: Int, populate: CustomJson, aggregate: CustomJson): [tweet]
+  user(id: String!): user
+  users(where: CustomJson, sort: String, skip: Int, limit: Int, populate: CustomJson, aggregate: CustomJson): [user]
+  warehousetransaction(id: String!): warehousetransaction
+  warehousetransactions(where: CustomJson, sort: String, skip: Int, limit: Int, populate: CustomJson, aggregate: CustomJson): [warehousetransaction]
+  archive(id: String!): archive
+  archives(where: CustomJson, sort: String, skip: Int, limit: Int, populate: CustomJson, aggregate: CustomJson): [archive]
+}
+
+type tweet implements Node {
+  id: String!
+  body: String
+  created_at: CustomJson
+  updated_at: CustomJson
+  type: String!
+  count: String!
+  average: Float!
+  user_id: user
+}
+
+type user implements Node {
+  id: String!
+  name: String
+  username: String
+  email: String
+  avatar: String
+  cover: String
+  created_at: CustomJson
+  updated_at: CustomJson
+  tweets: CustomJson
+  type: String!
+  count: String!
+  average: Float!
+}
+
+type warehousetransaction implements Node {
+  WarehouseTransactionID: CustomJson
+  CustomerID: CustomJson
+  FacilityID: CustomJson
+  Status: CustomJson
+  UnderAllocated: CustomJson
+  CreationDate: String
+  ProcessDate: String
+  id: String!
+  type: String!
+  count: String!
+  average: Float!
+}

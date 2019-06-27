@@ -300,20 +300,20 @@ module.exports = {
             return results;
           });
         } else if (aggregate) {
-          if (aggregate[0] == 'count') {
+          if (aggregate[0] === 'count') {
             wlm = waterlineModel.count(whereClause);
             return wlm.then((results) => {
               var res = [{ count: results }];
               return res;
             });
-          } else if (aggregate[0] == 'sum') {
+          } else if (aggregate[0] === 'sum') {
             return waterlineModel
               .find(whereClause)
               .sum(aggregate[1])
               .then((results) => {
                 return results;
               });
-          } else if (aggregate[0] == 'average') {
+          } else if (aggregate[0] === 'average') {
             return waterlineModel
               .findOne(whereClause)
               .average(aggregate[1])
@@ -433,7 +433,7 @@ module.exports = {
         return Promise.all(allFinds).then((values) => {
           var foundIndex = -1;
           var foundObjs = values.find((value, index) => {
-            if (value.length == 1) {
+            if (value.length === 1) {
               foundIndex = index;
               return true;
             }

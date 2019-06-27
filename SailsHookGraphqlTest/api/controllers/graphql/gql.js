@@ -19,14 +19,7 @@ module.exports = {
   },
 
   fn: async function(inputs, exits) {
-    // console.log(sails.models);
-    var schema = graphQLService.getGraphQLSchemaFrom(sails.models);
-    console.log(printSchema(schema));
-    require('express-graphql')({
-      schema: schema,
-      // directives: [GraphQLDateDirective],
-      pretty: true,
-      graphiql: true
-    })(this.req, this.res);
+
+    sails.config.graphql(this.req, this.res);
   }
 };
