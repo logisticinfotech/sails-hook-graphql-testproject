@@ -66,6 +66,7 @@ module.exports = function defineGraphqlHook(sails) {
         return res.status(200).send('Hey there, ' + name + '!');
       }, 'hellogreet');
 
+      sails.config.routes["GET /hellogreet"] = { action: 'hellogreet' };
       // return cb();
 
     }

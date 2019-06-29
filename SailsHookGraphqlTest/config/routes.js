@@ -26,7 +26,7 @@ module.exports.routes = {
 
   'POST /graphql': { action: 'graphql/gql' },
 
-  'GET /hellogreet': { action: 'hellogreet' }
+  // 'GET /hellogreet': { action: 'hellogreet' }
   // 'POST /graphqlManually': { action: 'graphql/gqlmanually' },
 
   /***************************************************************************
