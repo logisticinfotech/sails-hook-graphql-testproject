@@ -8,6 +8,8 @@
 module.exports = {
   tableName: 'Customer',
   primaryKey: 'CustomerID',
+  graphqlQuery:true,
+  graphqlMutation:true,
   attributes: {
     CustomerID: {
       type: 'number',

@@ -7,6 +7,8 @@
 
 module.exports = {
   tableName: 'users',
+  graphqlQuery:true,
+  graphqlMutation:true,
   attributes: {
     id: {
       type: 'number',

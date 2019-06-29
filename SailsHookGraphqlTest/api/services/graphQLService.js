@@ -443,43 +443,48 @@ module.exports = {
         });
       }
     };
-
+    // this is for create query of models
     _.each(models, function eachInstantiatedModel(thisModel, modelID) {
-      GraphQLSchemaManager.types[
-        modelID
-      ] = graphQLService.createGraphQLTypeForWaterlineModel(
-        thisModel,
-        modelID,
-        Node,
-        GraphQLSchemaManager
-      );
-      GraphQLSchemaManager.findArgsTypes[
-        modelID
-      ] = graphQLService.createFindArgsTypeForWaterlineModel(
-        thisModel,
-        modelID,
-        Node,
-        GraphQLSchemaManager
-      );
-      GraphQLSchemaManager.queries[
-        modelID
-      ] = graphQLService.createGraphQLQueries(
-        thisModel,
-        GraphQLSchemaManager.types[modelID],
-        modelID,
-        GraphQLSchemaManager
-      );
+      if (thisModel.graphqlQuery) {
+        GraphQLSchemaManager.types[
+          modelID
+        ] = graphQLService.createGraphQLTypeForWaterlineModel(
+          thisModel,
+          modelID,
+          Node,
+          GraphQLSchemaManager
+        );
+        GraphQLSchemaManager.findArgsTypes[
+          modelID
+        ] = graphQLService.createFindArgsTypeForWaterlineModel(
+          thisModel,
+          modelID,
+          Node,
+          GraphQLSchemaManager
+        );
+        GraphQLSchemaManager.queries[
+          modelID
+        ] = graphQLService.createGraphQLQueries(
+          thisModel,
+          GraphQLSchemaManager.types[modelID],
+          modelID,
+          GraphQLSchemaManager
+        );
+      }
     });
 
+    // this is for create mutation of models
     _.each(models, function eachInstantiatedModel(thisModel, modelID) {
-      GraphQLSchemaManager.mutations[
-        modelID
-      ] = graphQLService.createGraphQLMutations(
-        thisModel,
-        GraphQLSchemaManager.types[modelID],
-        modelID,
-        GraphQLSchemaManager
-      );
+      if (thisModel.graphqlMutation) {
+        GraphQLSchemaManager.mutations[
+          modelID
+        ] = graphQLService.createGraphQLMutations(
+          thisModel,
+          GraphQLSchemaManager.types[modelID],
+          modelID,
+          GraphQLSchemaManager
+        );
+      }
     });
 
     var queryType = new GraphQLObjectType({
