@@ -13,7 +13,7 @@ const {
   GraphQLScalarType
 } = require('graphql');
 
-module.exports = {
+module.exports = graphQLService = {
   CustomJson: new GraphQLScalarType({
     name: 'CustomJson',
     description: 'CustomJson scalar type',

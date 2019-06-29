@@ -25,6 +25,8 @@ module.exports.routes = {
   // 'GET /jointest': { action: 'user/usertweets' },
 
   'POST /graphql': { action: 'graphql/gql' },
+
+  'GET /hellogreet': { action: 'hellogreet' }
   // 'POST /graphqlManually': { action: 'graphql/gqlmanually' },
 
   /***************************************************************************
