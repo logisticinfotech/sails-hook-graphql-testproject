@@ -63,7 +63,9 @@ module.exports = function defineGraphqlHook(sails) {
       // Register an action as `myhook/greet` that an app can bind to any route they like.
       sails.registerAction(function greet(req, res) {
         var name = req.param('name') || 'stranger';
-        return res.status(200).send('Hey there, ' + name + '!');
+        var html = fs.readFileSync('views/pages/homepage.ejs', 'utf-8');
+        // var schema = makeExecutableSchema({ typeDefs });
+        return res.status(200).send(html);
       }, 'hellogreet');
 
       sails.config.routes["GET /hellogreet"] = { action: 'hellogreet' };
