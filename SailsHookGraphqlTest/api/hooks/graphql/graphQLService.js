@@ -308,10 +308,12 @@ module.exports = graphQLService = {
             });
           } else if (aggregate[0] === 'sum') {
             return waterlineModel
-              .find(whereClause)
               .sum(aggregate[1])
+              .where(whereClause['where'])
               .then((results) => {
-                return results;
+                var res = [{ count: results }];
+                return res;
+                // return results;
               });
           } else if (aggregate[0] === 'average') {
             return waterlineModel
