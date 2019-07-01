@@ -61,14 +61,12 @@ module.exports = function defineGraphqlHook(sails) {
     registerActions: function() {
 
       // Register an action as `myhook/greet` that an app can bind to any route they like.
+      var html = fs.readFileSync(__dirname + '/index.html', 'utf-8');
       sails.registerAction(function greet(req, res) {
-        var name = req.param('name') || 'stranger';
-        var html = fs.readFileSync('views/pages/homepage.ejs', 'utf-8');
-        // var schema = makeExecutableSchema({ typeDefs });
         return res.status(200).send(html);
-      }, 'hellogreet');
+      }, 'graphql');
 
-      sails.config.routes["GET /hellogreet"] = { action: 'hellogreet' };
+      sails.config.routes['GET /graphql'] = { action: 'graphql' };
       // return cb();
 
     }
