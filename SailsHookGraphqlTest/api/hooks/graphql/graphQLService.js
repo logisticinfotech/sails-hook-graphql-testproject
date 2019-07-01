@@ -445,7 +445,7 @@ module.exports = graphQLService = {
     };
     // this is for create query of models
     _.each(models, function eachInstantiatedModel(thisModel, modelID) {
-      if (thisModel.graphqlQuery) {
+      if (thisModel.graphql && thisModel.graphql.query) {
         GraphQLSchemaManager.types[
           modelID
         ] = graphQLService.createGraphQLTypeForWaterlineModel(
@@ -475,7 +475,7 @@ module.exports = graphQLService = {
 
     // this is for create mutation of models
     _.each(models, function eachInstantiatedModel(thisModel, modelID) {
-      if (thisModel.graphqlMutation) {
+      if (thisModel.graphql && thisModel.graphql.mutation) {
         GraphQLSchemaManager.mutations[
           modelID
         ] = graphQLService.createGraphQLMutations(

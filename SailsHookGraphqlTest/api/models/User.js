@@ -7,8 +7,10 @@
 
 module.exports = {
   tableName: 'users',
-  graphqlQuery:true,
-  graphqlMutation:true,
+  graphql: {
+    query: true,
+    mutation: true
+  },
   attributes: {
     id: {
       type: 'number',
@@ -34,7 +36,7 @@ module.exports = {
       columnType: 'datetime'
     },
     updated_at: {
-      type: 'ref', 
+      type: 'ref',
       columnType: 'datetime'
     },
     tweets: {
