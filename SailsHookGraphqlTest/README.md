@@ -111,3 +111,10 @@ npm install graphql express-graphql moment
    sum:count
   }
 }
+
+## Example 12 (get average of specific where condition)
+{
+  users(aggregate:["average","id"], where:{id: { gt: "40", lte: "45" }}){
+   average:count
+  }
+}
