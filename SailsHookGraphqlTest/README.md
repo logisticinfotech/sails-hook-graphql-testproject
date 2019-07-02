@@ -118,3 +118,35 @@ npm install graphql express-graphql moment
    average:count
   }
 }
+
+## Example 13 (find where name contains specific value)
+{
+  users(where:{name: { contains: "el" }}){
+    id
+    name
+    username
+    
+  }
+}
+
+# you find more query - language here like startsWith ,endsWith https://sailsjs.com/documentation/concepts/models-and-orm/query-language
+
+## Example 14 (where in and nin also usefull)
+{
+  users(where:{id: { in:[41,43] }}){
+    id
+    name
+    username
+    
+  }
+}
+
+## Example 15 
+{
+  users(where:{id: { nin:[41,43] }}){
+    id
+    name
+    username
+    
+  }
+}
