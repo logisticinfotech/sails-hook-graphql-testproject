@@ -150,3 +150,46 @@ npm install graphql express-graphql moment
     
   }
 }
+
+## Example 16
+
+{
+  users(where:{name: { contains: "el" },id: { in:[41,43] }}){
+    id
+    name
+    username
+    
+  }
+}
+
+## Example 17 Or condition in where case
+{
+  users(where:{or:[ {name: { contains: "Annabel" }},{id: { in:[41,43] }}]}){
+    id
+    name
+    username
+    
+  }
+}
+
+## Example 18
+mutation{
+  createUser(name:"test",username:"test110",email:"test@gmail.com"){
+    id,
+    username
+  }
+}
+
+## Example 19  (Right now update only using id)
+mutation{
+  updateUser(id:102,name:"test"){
+    name
+  }
+}
+
+## Example 20 
+mutation{
+  deleteUser(id:102){
+    name
+  }
+}

@@ -37,7 +37,7 @@ module.exports = graphQLService = {
             return value; // value sent to the client
         }
     }),*/
-  waterlineTypesToGraphQLType: function(attribute) {
+  waterlineTypesToGraphQLType: function (attribute) {
     switch (attribute.type) {
       case 'string':
         return GraphQLString;
@@ -52,7 +52,7 @@ module.exports = graphQLService = {
     }
   },
 
-  getFindArgsForWaterlineModel: function(modelID, GraphQLSchemaManager) {
+  getFindArgsForWaterlineModel: function (modelID, GraphQLSchemaManager) {
     return {
       where: {
         name: 'criteria',
@@ -81,7 +81,7 @@ module.exports = graphQLService = {
     };
   },
 
-  createGraphQLTypeForWaterlineModel: function(
+  createGraphQLTypeForWaterlineModel: function (
     model,
     modelID,
     Node,
@@ -162,7 +162,7 @@ module.exports = graphQLService = {
     });
   },
 
-  createFindArgsTypeForWaterlineModel: function(
+  createFindArgsTypeForWaterlineModel: function (
     model,
     modelID,
     Node,
@@ -237,7 +237,7 @@ module.exports = graphQLService = {
     });
   },
 
-  createGraphQLQueries: function(
+  createGraphQLQueries: function (
     waterlineModel,
     graphqlType,
     modelID,
@@ -255,9 +255,9 @@ module.exports = graphQLService = {
       },
       resolve: (obj, { where, id }) => {
         return waterlineModel
-          .findOne({
+          .find({
             id: id || (where && where.id)
-          })
+          }).limit(1)
           .then((result) => {
             return result;
           });
@@ -320,7 +320,7 @@ module.exports = graphQLService = {
               .avg(aggregate[1])
               .where(whereClause['where'])
               .then((results) => {
-                var res = [{ count: results}];
+                var res = [{ count: results }];
                 return res;
               });
           }
@@ -334,11 +334,11 @@ module.exports = graphQLService = {
     return queries;
   },
 
-  capitalizeFirstLetter: function(string) {
+  capitalizeFirstLetter: function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   },
 
-  createGraphQLMutations: function(
+  createGraphQLMutations: function (
     waterlineModel,
     graphqlType,
     modelID,
@@ -361,28 +361,69 @@ module.exports = graphQLService = {
     mutations['create' + graphQLService.capitalizeFirstLetter(modelID)] = {
       type: graphqlType,
       args: convertedFields,
-      resolve: wrapResolve(waterlineModel.create),
+      // resolve: wrapResolve(waterlineModel.create),
+      resolve: async function (root, args, context, info) {
+        // check context also before populating
+        try {
+          let query = await waterlineModel.create(args).fetch();
+          // Must do 2 step query to be able to populate (same goes for update and delete)
+          // for (let i = 0; i < model.associations.length; i++) {
+          //   query = query.populate(model.associations[i].alias)
+          // }
+          return query;
+        } catch (e) {
+          return e
+        }
+      },
       name: 'create' + modelID
     };
 
     mutations['update' + graphQLService.capitalizeFirstLetter(modelID)] = {
       type: graphqlType,
       args: convertedFields,
-      resolve: wrapResolve(waterlineModel.update),
+      // resolve: wrapResolve(waterlineModel.update),
+      resolve: async function (root, args, context, info) {
+        // // next ligne is false
+        // if (!Object.keys(args).length) {
+        //   return new Error(`must provide at least one parameter in `)
+        // }
+        // // check context also before populating
+        try {
+          let query = await waterlineModel.update({ id: args.id }).set(args).fetch();
+          return query;
+        } catch (e) {
+          return e;
+        }
+      },
       name: 'update' + modelID
     };
 
     mutations['delete' + graphQLService.capitalizeFirstLetter(modelID)] = {
       type: graphqlType,
       args: convertedFields,
-      resolve: wrapResolve(waterlineModel.delete),
+      // resolve: wrapResolve(waterlineModel.delete),
+      resolve: async function (root, args, context, info) {
+        if (!Object.keys(args).length) {
+          return new Error(`must provide at least one parameter`);
+        }
+        // check context also before populating
+        try {
+          let query = waterlineModel.destroy(args).fetch();
+          // for (let i = 0; i < model.associations.length; i++) {
+          //   query = query.populate(model.associations[i].alias)
+          // }
+          return await query;
+        } catch (e) {
+          return e;
+        }
+      },
       name: 'delete' + modelID
     };
 
     return mutations;
   },
 
-  getGraphQLSchemaFrom: function(models) {
+  getGraphQLSchemaFrom: function (models) {
     if (!models) {
       throw new Error('Invalid input args models is' + models);
     }
