@@ -1,4 +1,4 @@
-npm install graphql express-graphql moment
+npm install graphql express-graphql @logisticinfotech/sails-hook-graphql
 
 # Query Examples
 
@@ -24,7 +24,7 @@ npm install graphql express-graphql moment
     }
 }
 
-## Example 3 
+## Example 3
 {
     users(populate: [{type: "tweets",criteria:{limit:2}}], limit: 1)
     {
@@ -50,7 +50,7 @@ npm install graphql express-graphql moment
     id
     name
     username
-    
+
   }
 }
 
@@ -62,10 +62,10 @@ npm install graphql express-graphql moment
     id
     name
     username
-    
+
   }
 }
-# You can use associate for get specific data 
+# You can use associate for get specific data
 
 
 ## Example 7 sort asc desc using fields name
@@ -74,7 +74,7 @@ npm install graphql express-graphql moment
     id
     name
     username
-    
+
   }
 }
 
@@ -84,7 +84,7 @@ npm install graphql express-graphql moment
     id
     name
     username
-    
+
   }
 }
 
@@ -94,7 +94,7 @@ npm install graphql express-graphql moment
     id
     name
     username
-    
+
   }
 }
 
@@ -125,7 +125,7 @@ npm install graphql express-graphql moment
     id
     name
     username
-    
+
   }
 }
 
@@ -137,17 +137,17 @@ npm install graphql express-graphql moment
     id
     name
     username
-    
+
   }
 }
 
-## Example 15 
+## Example 15
 {
   users(where:{id: { nin:[41,43] }}){
     id
     name
     username
-    
+
   }
 }
 
@@ -158,7 +158,7 @@ npm install graphql express-graphql moment
     id
     name
     username
-    
+
   }
 }
 
@@ -168,7 +168,7 @@ npm install graphql express-graphql moment
     id
     name
     username
-    
+
   }
 }
 
@@ -187,7 +187,7 @@ mutation{
   }
 }
 
-## Example 20 
+## Example 20
 mutation{
   deleteUser(id:102){
     name

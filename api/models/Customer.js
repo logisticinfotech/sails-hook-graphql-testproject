@@ -9,7 +9,7 @@ module.exports = {
   tableName: 'Customer',
   primaryKey: 'CustomerID',
   graphql: {
-    query: true,
+    query: false,
     mutation: false
   },
   attributes: {
